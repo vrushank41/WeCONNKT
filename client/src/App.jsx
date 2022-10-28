@@ -1,19 +1,23 @@
 import './stylesheets/App.css'
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-} from "react-router-dom";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Outlet, Link } from "react-router-dom";
+import Login from "./pages/Login"
 import Register from './pages/Register';
+
 
 function App() {
   return (
     <div className="App">
+
       <Router>
         <Routes>
-          <Route path = "/register" element = { <Register />}/>
+          <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register />} />
         </Routes>
       </Router>
+
+
     </div>
   )
 }

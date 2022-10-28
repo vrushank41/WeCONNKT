@@ -2,3 +2,13 @@
     margin: 0;
     padding: 0;
 }
+
+:root{
+    --dark-blue-secondary:#A5C9CA;
+    --dark-blue-primary:#3FC1C9;
+    --dark-pink:#FC5185;
+    --light-pink:#F5F5F5;
+    --black:#000000;
+    --grey: #808080
+
+}
