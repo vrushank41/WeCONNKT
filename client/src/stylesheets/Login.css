@@ -6,6 +6,7 @@
   gap: 1rem;
   align-items: center;
   background-color: var(--dark-blue-secondary);
+  
 }
   .brand {
     display: flex;
@@ -15,7 +16,6 @@
 img {
       height: 5rem;
       width: 5rem;
-      border-radius: 50%;
     }
 h1 {
       color: var(--dark-pink);
@@ -29,7 +29,9 @@ h1 {
     background-color: var(--light-pink);
     border-radius: 2rem;
     padding: 5rem;
+    box-shadow: 1px 1px 20px var(--grey);
   }
+
   input {
     background-color: transparent;
     padding: 1rem;
