@@ -1,4 +1,4 @@
-.form-container{height: 100vh;
+.form-container-login{height: 100vh;
   width: 100vw;
   display: flex;
   flex-direction: column;
@@ -8,21 +8,21 @@
   background-color: var(--dark-blue-secondary);
   
 }
-  .brand {
+  .brand-login {
     display: flex;
     align-items: center;
     gap: 1rem;
     justify-content: center;}
-img {
+.img-login {
       height: 5rem;
       width: 5rem;
     }
-h1 {
+.h1-login {
       color: var(--dark-pink);
       text-transform: uppercase;
     }
   
-  form {
+  .form-login {
     display: flex;
     flex-direction: column;
     gap: 2rem;
@@ -32,7 +32,7 @@ h1 {
     box-shadow: 1px 1px 20px var(--grey);
   }
 
-  input {
+  .input-login {
     background-color: transparent;
     padding: 1rem;
     border: 0.1rem solid var(--dark-blue-primary);
@@ -48,7 +48,7 @@ h1 {
       outline: none;
     }
     
-  button {
+  .button-login {
     background-color: var(--dark-blue-primary);
     color: white;
     padding: 1rem 2rem;
@@ -64,10 +64,10 @@ h1 {
       background-color: var(--dark-blue-secondary);
     }
   
-  span {
+  .span-login {
     color: var(--black);
     text-transform: uppercase;}
-    a {
+    .a-login {
       color: var(--dark-pink);
       text-decoration: none;
       font-weight: bold;

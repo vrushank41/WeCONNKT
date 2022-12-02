@@ -1,32 +1,36 @@
 import React, { useState, useEffect, useRef } from "react";
-// import ChatInput from "./ChatInput";
-// import Logout from "./Logout";
+import ChatInput from "./ChatInput";
 import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
-// import { sendMessageRoute, recieveMessageRoute } from "../utils/APIRoutes";
+import { SEND_MESSAGE_ROUTE, RECEIVE_MESSAGE_ROUTE } from "../utils/APIRoutes";
+import "../stylesheets/chatContainer.scss"
 
 const ChatContainer = ({ currentChat, socket }) => {
   const [messages, setMessages] = useState([]);
   const scrollRef = useRef();
   const [arrivalMessage, setArrivalMessage] = useState(null);
+  const [searchMessages, setSearchMessages] = useState('')
 
-  useEffect(async () => {
-    const data = {}
-    // const data = await JSON.parse(
-    //   localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
-    // );
-    const response = await axios.post(recieveMessageRoute, {
-      from: data._id,
-      to: currentChat._id,
-    });
-    setMessages(response.data);
+  useEffect(() => {
+    // const data = {}
+    const getData = async () => {
+      const data = await JSON.parse(
+        localStorage.getItem(import.meta.env.REACT_APP_LOCALHOST_KEY)
+      );
+      const response = await axios.post(RECEIVE_MESSAGE_ROUTE, {
+        from: data._id,
+        to: currentChat._id,
+      });
+      setMessages(response.data);
+    }
+    getData()
   }, [currentChat]);
 
   useEffect(() => {
     const getCurrentChat = async () => {
       if (currentChat) {
         await JSON.parse(
-          localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
+          localStorage.getItem(import.meta.env.REACT_APP_LOCALHOST_KEY)
         )._id;
       }
     };
@@ -35,14 +39,15 @@ const ChatContainer = ({ currentChat, socket }) => {
 
   const handleSendMsg = async (msg) => {
     const data = await JSON.parse(
-      localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
+      localStorage.getItem(import.meta.env.REACT_APP_LOCALHOST_KEY)
     );
+
     socket.current.emit("send-msg", {
       to: currentChat._id,
       from: data._id,
       msg,
     });
-    await axios.post(sendMessageRoute, {
+    await axios.post(SEND_MESSAGE_ROUTE, {
       from: data._id,
       to: currentChat._id,
       message: msg,
@@ -52,6 +57,10 @@ const ChatContainer = ({ currentChat, socket }) => {
     msgs.push({ fromSelf: true, message: msg });
     setMessages(msgs);
   };
+
+  const handleSearchMessages = (e) => {
+    setSearchMessages(e.target.value)
+  }
 
   useEffect(() => {
     if (socket.current) {
@@ -70,32 +79,44 @@ const ChatContainer = ({ currentChat, socket }) => {
   }, [messages]);
 
   return (
-    <div className="container">
-      <div className="chat-header">
-        <div className="user-details">
-          <div className="avatar">
+    <div className="container-chatContainer">
+      <div className="chat-header-chatContainer">
+        <div className="user-details-chatContainer">
+          <div className="avatar-chatContainer">
             <img
+              className="img-chatContainer"
               src={`data:image/svg+xml;base64,${currentChat.avatarImage}`}
               alt=""
             />
           </div>
-          <div className="username">
-            <h3>{currentChat.username}</h3>
+          <div className="username-chatContainer">
+            <h3 className="h3-chatContainer">{currentChat.username}</h3>
           </div>
         </div>
-        <Logout />
+        <div className="message-logout">
+          <input type="text" className="message-search" placeholder="Search Messages..." value={searchMessages} onChange={handleSearchMessages} />
+        </div>
       </div>
-      <div className="chat-messages">
-        {messages.map((message) => {
+      <div className="chat-messages-chatContainer">
+        {/* {console.log(messages)} */}
+        {messages.filter(msg => msg.message.toLowerCase().includes(searchMessages.toLowerCase())).map((message) => {
           return (
             <div ref={scrollRef} key={uuidv4()}>
               <div
-                className={`message ${
-                  message.fromSelf ? "sended" : "recieved"
-                }`}
+                className={`message-chatContainer ${message.fromSelf ? "sended-chatContainer" : "recieved-chatContainer"
+                  }`}
               >
-                <div className="content ">
-                  <p>{message.message}</p>
+                <div className="content-chatContainer ">
+                  <p className="p-chatContainer">{message.message}</p>
+                  <p className="p-chatContainer">
+                    <span style={{ "fontSize": "12px" }}>
+                      {message.datetime ? new Date(message.datetime).toLocaleDateString() : new Date().toLocaleDateString()}
+                    </span> &nbsp;
+                    <span style={{ "fontSize": "10px" }}>
+                      {/* {new Date(message.datetime).toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })} */}
+                      {message.datetime ? new Date(message.datetime).toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true }) : new Date().toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}
+                    </span>
+                  </p>
                 </div>
               </div>
             </div>

@@ -5,6 +5,7 @@ import { useNavigate, Link } from "react-router-dom"
 import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import Logo from "../assets/logo.jpeg"
+import { REGISTER_ROUTE } from "../utils/APIRoutes"
 
 
 const Register = () => {
@@ -24,11 +25,11 @@ const Register = () => {
         confirmPassword: "",
     })
 
-    /* useEffect(() => {
-        if (localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)) {
-          navigate("/");
+    useEffect(() => {
+        if (localStorage.getItem(import.meta.env.REACT_APP_LOCALHOST_KEY)) {
+            navigate("/");
         }
-      }, []) */
+    }, [])
 
     const handleChange = (event) => {
         setValues({ ...values, [event.target.name]: event.target.value })
@@ -64,10 +65,9 @@ const Register = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        handleValidation()
-        /* if (handleValidation()) {
+        if (handleValidation()) {
             const { email, username, password } = values
-            const { data } = await axios.post(registerRoute, {
+            const { data } = await axios.post(REGISTER_ROUTE, {
                 username,
                 email,
                 password,
@@ -78,47 +78,51 @@ const Register = () => {
             }
             if (data.status === true) {
                 localStorage.setItem(
-                    // process.env.REACT_APP_LOCALHOST_KEY,
+                    import.meta.env.REACT_APP_LOCALHOST_KEY,
                     JSON.stringify(data.user)
                 )
                 navigate("/")
             }
-        } */
+        }
     }
     return (
-        <div className='form-container'>
-            <form action="" onSubmit={(e) => handleSubmit(e)}>
-                <div className="brand">
-                    <img src={Logo} alt="logo" />
+        <div className='form-container-register'>
+            <form className="form-register" action="" onSubmit={(e) => handleSubmit(e)}>
+                <div className="brand-register">
+                    <img className="img-register" src={Logo} alt="logo" />
                     <h1>WeConnkt</h1>
                 </div>
                 <input
+                    className="input-register"
                     type="text"
                     placeholder="Username"
                     name="username"
                     onChange={(e) => handleChange(e)}
                 />
                 <input
+                className="input-register"
                     type="email"
                     placeholder="Email"
                     name="email"
                     onChange={(e) => handleChange(e)}
                 />
                 <input
+                className="input-register"
                     type="password"
                     placeholder="Password"
                     name="password"
                     onChange={(e) => handleChange(e)}
                 />
                 <input
+                className="input-register"
                     type="password"
                     placeholder="Confirm Password"
                     name="confirmPassword"
                     onChange={(e) => handleChange(e)}
                 />
-                <button type="submit">Create User</button>
-                <span>
-                    Already have an account ? <Link to="/login">Login</Link>
+                <button className="button-register" type="submit">Create User</button>
+                <span className="span-register">
+                    Already have an account ? <Link className="a-register" to="/login">Login</Link>
                 </span>
             </form>
             <ToastContainer />

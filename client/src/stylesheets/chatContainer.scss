@@ -1,4 +1,33 @@
-.container {
+.message-logout{
+    display: flex;
+    width: 50%;
+    justify-content: end;
+}
+
+.message-search {
+    background-color: transparent;
+    padding: 0.6rem;
+    margin-right: 1.5rem;
+    border: 0.1rem solid var(--dark-blue-primary);
+    border-left: 0.4rem solid var(--dark-blue-primary);
+    border-right: 0.4rem solid var(--dark-blue-primary);
+    border-radius: 0.9rem;
+    color: var(--dark-pink);
+    width: 70%;
+    font-size: 1.2rem;
+    font-family: "Squared";  
+    letter-spacing: 1px;
+
+  }
+    .message-search:focus {
+        border: 0.1rem solid var(--dark-pink);
+        border-left: 0.4rem solid var(--dark-pink);
+        border-right: 0.4rem solid var(--dark-pink);
+        border-radius: 0.9rem;
+        outline: none;
+    }
+
+.container-chatContainer {
     display: grid;
     grid-template-rows: 10% 80% 10%;
     gap: 0.1rem;
@@ -8,32 +37,32 @@
         grid-template-rows: 15% 70% 15%;
     }
 
-    .chat-header {
+    .chat-header-chatContainer {
         display: flex;
         justify-content: space-between;
         align-items: center;
         padding: 0 2rem;
 
-        .user-details {
+        .user-details-chatContainer {
             display: flex;
             align-items: center;
             gap: 1rem;
 
-            .avatar {
-                img {
+            .avatar-chatContainer {
+                .img-chatContainer {
                     height: 3rem;
                 }
             }
 
-            .username {
-                h3 {
+            .username-chatContainer {
+                .h3-chatContainer {
                     color: white;
                 }
             }
         }
     }
 
-    .chat-messages {
+    .chat-messages-chatContainer {
         padding: 1rem 2rem;
         display: flex;
         flex-direction: column;
@@ -50,11 +79,11 @@
             }
         }
 
-        .message {
+        .message-chatContainer {
             display: flex;
             align-items: center;
 
-            .content {
+            .content-chatContainer {
                 max-width: 40%;
                 overflow-wrap: break-word;
                 padding: 1rem;
@@ -68,18 +97,18 @@
             }
         }
 
-        .sended {
+        .sended-chatContainer {
             justify-content: flex-end;
 
-            .content {
+            .content-chatContainer {
                 background-color: #4f04ff21;
             }
         }
 
-        .recieved {
+        .recieved-chatContainer {
             justify-content: flex-start;
 
-            .content {
+            .content-chatContainer {
                 background-color: #9900ff20;
             }
         }

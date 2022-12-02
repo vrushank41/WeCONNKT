@@ -5,18 +5,22 @@ import '../stylesheets/welcome.scss'
 export default function Welcome() {
   const [userName, setUserName] = useState("");
   useEffect(() => {
-    const getData=async ()=>{
-        setUserName(await JSON.parse(localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)).username);
+    const getData = async () => {
+      const user = await JSON.parse(localStorage.getItem(import.meta.env.REACT_APP_LOCALHOST_KEY))
+      if (user) {
+        setUserName(user.username);
+      }
     }
-}, []);
-  
-return (
-    <div className="container">
-      <img src={Robot} alt="" />
-      <h1>
-        Welcome, <span>{userName}!</span>
+    getData()
+  }, []);
+
+  return (
+    <div className="container-welcome">
+      <img className="img-welcome" src={Robot} alt="" />
+      <h1 className="h1-welcome">
+        Welcome, <span className="span-welcome">{userName ? userName : "Anonymous"}!</span>
       </h1>
-      <h3>Please select a chat to Start messaging.</h3>
+      <h3 className="h3-welcome">Please select a chat to Start messaging.</h3>
     </div>
-);
+  );
 }
