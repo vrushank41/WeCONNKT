@@ -1,5 +1,6 @@
 # WeCONNKT
 Project Title : Real-Time Chat Application using SocketIO
+Documentation Link: https://github.com/vrushank41/SE-UE20CS303-Project-
 
 ![Image](https://user-images.githubusercontent.com/93258530/197477820-a6065f08-2569-4b34-80e4-fb33a7fbe9d7.jpeg)
 ### Proposed Project Description  
